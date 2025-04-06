@@ -7,7 +7,6 @@ export function HomePage() {
 		<div>
 			<Introduction />
 			<BrowseItems />
-			<SuccessStories />
 		</div>
 	);
 }
