@@ -17,11 +17,11 @@ export const CATEGORY = {
 	},
 	BOOKS: {
 		name: "Book",
-		color: "",
+		color: "bg-orange-200 text-orange-800",
 	},
 	HOUSEHOLD: {
 		name: "Household",
-		color: "",
+		color: "bg-yellow-200 text-yellow-800",
 	},
 } as const;
 
@@ -47,8 +47,8 @@ const items: TItem[] = [
 	},
 	{
 		id: 2,
-		category: "CLOTHING" as keyof typeof CATEGORY,
-		title: "Gap T Shirt",
+		category: "HOUSEHOLD" as keyof typeof CATEGORY,
+		title: "Hand Mixer",
 		description:
 			"dausi dh ihe wqi uehui wqhe ui wqhu eihw uie heiwqh hweih iuqwh eui hqwiue ",
 		location: "Jurong West St 42",
@@ -75,8 +75,8 @@ const items: TItem[] = [
 	},
 	{
 		id: 5,
-		category: "FOOD" as keyof typeof CATEGORY,
-		title: "Apples",
+		category: "BOOKS" as keyof typeof CATEGORY,
+		title: "Harry Potter: Greatest Width",
 		description: "ds ndia odiosh  wjieoh oiah  jiowqjr ",
 		location: "Jurong West St 42",
 		time: "10/04/2025",
