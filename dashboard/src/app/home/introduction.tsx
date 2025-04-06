@@ -8,7 +8,7 @@ export function Introduction() {
 				Here, we aim to connect individuals, organizations and communities to
 				support each other through donations of goods, services or resources.
 				Make an impact in your community by giving or receiving help where it's
-				needed most.
+				needed the most.
 			</p>
 		</div>
 	);
