@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { NavBar } from "./components/NavBar";
-import { BrowsePage } from "./browse/page";
 import { HomePage } from "./home/page";
 
 export default function Home() {
@@ -8,9 +6,8 @@ export default function Home() {
 	return (
 		<div className="">
 			<NavBar />
-			<div className="p-4">
+			<div className="p-8">
 				<HomePage />
-				<BrowsePage />
 			</div>
 		</div>
 	);
