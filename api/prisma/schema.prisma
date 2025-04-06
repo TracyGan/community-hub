@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      String  @id 
+  name    String
+  email   String @unique
+  password String 
+  donations Donation[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+}
+
+model Donation {
+  id String @id
+  description String
+  categoryId String
+  donorId String
+  recipientId String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+
+  donor User  @relation(fields: [donorId], references: [id])
+  recipient Recipient @relation(fields: [recipientId], references: [id])
+  category  Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id String @id 
+  name String @unique
+
+  donation Donation[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+}
+
+model Recipient {
+  id String @id
+  name String
+  email String?
+  phone String?
+
+  donation Donation[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+}

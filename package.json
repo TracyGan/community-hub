@@ -1,0 +1,11 @@
+{
+    "name": "recipe-builder",
+    "scripts": {
+        "dashboard": "bun dev dashboard",
+        "api": "node api/index.js",
+        "dev": "concurrently \"npm run dashboard\" \"npm run api\""
+    },
+    "dependencies": {
+        "concurrently": "^9.1.2"
+    }
+}
