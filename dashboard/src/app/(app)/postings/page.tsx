@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllDonations } from "@/app/queries/donations";
+import { useGetAllUserDonations } from "@/app/queries/donations";
 import { NavBar } from "../../components/NavBar";
 import {
 	Table,
@@ -18,7 +18,7 @@ import { EditDonationModal } from "@/app/modals/edit-donation-modal";
 import { DeleteDonationModal } from "@/app/modals/delete-donation-modal";
 
 export default function PostingsPage() {
-	const { data: donations } = useGetAllDonations();
+	const { data: donations } = useGetAllUserDonations();
 
 	const [openDonationModal, setOpenDonationModal] = useState(false);
 	const [openDeleteDonationModal, setOpenDeleteDonationModal] = useState(false);

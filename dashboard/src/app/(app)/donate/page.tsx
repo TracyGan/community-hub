@@ -27,7 +27,7 @@ export default function MakeADonation() {
 			title: data.title,
 			description: data.description,
 			category: data.category,
-			status: "PENDING",
+			status: "NEW",
 			location: data.location,
 			time: data.time,
 		};

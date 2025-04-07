@@ -51,11 +51,14 @@ export async function deleteDonation(donationId: string) {
     }
 }
 
-export async function getAllDonations() {
+export async function getAllDonationsNotByUser(userId: string) {
    try {
         const donations = await prisma.donation.findMany({
             where: {
-                deletedAt: null
+                deletedAt: null,
+                NOT: {
+                    donorId: userId
+                }
             },
             orderBy: {
                 createdAt: 'desc'

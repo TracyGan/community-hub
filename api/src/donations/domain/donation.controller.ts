@@ -23,10 +23,11 @@ export const createDonation = async (req: Request, res: Response, next: NextFunc
     }
 }
 
-export const getAllDonations = async (req: Request, res: Response, next: NextFunction) => { 
+export const getAllDonationsNotByUser = async (req: Request, res: Response, next: NextFunction) => { 
     try {
-        log('Retrieving all donations')
-        const donations = await donationService.getAllDonations()
+        const userId = "e58c53ed-8a9b-4c77-b6ac-5cfd10498d94"
+        log('Retrieving all donations not by the user')
+        const donations = await donationService.getAllDonationsNotByUser(userId)
 
         res.status(200).json({ message: 'All donations are retrieved successfully', donations: donations })
     } catch (error) {
@@ -35,9 +36,9 @@ export const getAllDonations = async (req: Request, res: Response, next: NextFun
 }
 
 export const getAllDonationByUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId = "e58c53ed-8a9b-4c77-b6ac-5cfd10498d94"
+    const {userId} = req.params
     try {
-        log(`Retrieving all donations by user with id[${req.body}]`)
+        console.log(`Retrieving all donations by user with id[${req.body}]`)
 
         const donations = await donationService.getAllDonationByUser(userId)
         res.status(200).json({ message: 'All donations by user are retrieved successfully', donations })

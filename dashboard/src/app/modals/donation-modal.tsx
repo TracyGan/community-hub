@@ -9,6 +9,8 @@ import {
 	DialogTrigger,
 } from "../components/Dialog";
 import type { TDonation } from "../utils/types";
+import { invalidateGetAllDonations } from "../queries/donations";
+import { useUpdateDonation } from "../mutations/use-mutate-donations";
 
 export function DonationModal({
 	open,
@@ -19,10 +21,36 @@ export function DonationModal({
 	toggleOpen: (open: boolean) => void;
 	donationItem: TDonation;
 }) {
-	const { title, description, location, time } = donationItem;
+	const { title, description, location, time, category, status } = donationItem;
+
+	const updateDonationMutation = useUpdateDonation({
+		onSuccess: () => {
+			toggleOpen(false);
+			invalidateGetAllDonations();
+			toast("Donation has been created!");
+		},
+		onError: () => {
+			toast("Donation has unsuccessfully been created!");
+		},
+	});
 
 	const submitInterestInDonation = () => {
-		// todo: place the interest of donation
+		const updatedDonation: Omit<
+			TDonation,
+			"createdAt" | "updatedAt" | "deletedAt"
+		> = {
+			id: donationItem.id,
+			title: title,
+			description: description,
+			category: category,
+			status: "PENDING",
+			location: location,
+			time: time,
+			donorId: donationItem.donorId,
+			recipientId: "",
+		};
+
+		updateDonationMutation.mutate(updatedDonation);
 		toggleOpen(false);
 		toast("Interest in donation!");
 	};
@@ -42,11 +70,18 @@ export function DonationModal({
 						Pickup Time: {time ? time.toLocaleString() : "No set time"}
 					</p>
 
+					{status !== "NEW" && (
+						<p className="text-xs text-gray-600">
+							Sorry, this donation already has an recipient!
+						</p>
+					)}
+
 					<DialogFooter>
 						<Button
 							type="submit"
-							className="rounded-2xl bg-[#F6CE48] font-semibold hover:shadow-2xl border-none shadow-none"
+							className={`rounded-2xl bg-[#F6CE48] font-semibold hover:shadow-2xl border-none shadow-none ${status !== "NEW" ? "cursor-not-allowed" : "cursor-pointer"}`}
 							onClick={submitInterestInDonation}
+							disabled={status !== "NEW"}
 						>
 							Place Interest
 						</Button>

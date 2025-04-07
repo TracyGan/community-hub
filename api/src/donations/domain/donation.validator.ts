@@ -8,7 +8,7 @@ const createDonationSchema = z.object({
     category : z.enum([Category.FOOD, Category.CLOTHING, Category.FURNITURE, Category.BOOKS, Category.HOUSEHOLD]),
     location: z.string().min(1),
     time: z.string(),
-    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED])
+    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED, DonationStatus.NEW])
 })
 
 export type TDonationPayload = z.infer<typeof createDonationSchema>
@@ -30,7 +30,7 @@ const updateDonationSchema = z.object({
     category : z.enum([Category.FOOD, Category.CLOTHING, Category.FURNITURE, Category.BOOKS, Category.HOUSEHOLD]),
     location: z.string().min(1),
     time: z.string(),
-    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED]),
+    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED, DonationStatus.NEW]),
     donorId: z.string().uuid(),
 })
 

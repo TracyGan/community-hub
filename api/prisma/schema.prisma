@@ -24,6 +24,7 @@ enum Category {
 
 enum DonationStatus {
   PENDING
+  NEW
   ACCEPTED
   RETRIEVED
   CANCELLED

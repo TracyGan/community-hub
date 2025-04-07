@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useState } from "react";
 import { DonationModal } from "../../modals/donation-modal";
-import { useGetAllDonations } from "@/app/queries/donations";
+import { useGetAllDonationsNotByUser } from "@/app/queries/donations";
 import type { TDonation } from "@/app/utils/types";
 
 export const CATEGORY = {
@@ -95,7 +95,7 @@ export function BrowseItems() {
 		setOpenDonationModal(true);
 	}, []);
 
-	const { data: donations } = useGetAllDonations();
+	const { data: donations } = useGetAllDonationsNotByUser();
 
 	return (
 		<div>
