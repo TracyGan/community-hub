@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-// import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 
 import { cn } from "../utils/cn";
@@ -44,7 +44,7 @@ export function DateTimePicker({ value, onChange }: DateTimePickerProps) {
 				if (val === "PM" && hour < 12) newDate.setHours(hour + 12);
 				if (val === "AM" && hour >= 12) newDate.setHours(hour - 12);
 			}
-
+			setDate(newDate);
 			onChange(newDate); // notify form
 		}
 	};
@@ -58,7 +58,7 @@ export function DateTimePicker({ value, onChange }: DateTimePickerProps) {
 						!date && "text-muted-foreground",
 					)}
 				>
-					{/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
+					<CalendarIcon className="mr-2 h-4 w-4" />
 					{date ? (
 						format(date, "MM/dd/yyyy hh:mm aa")
 					) : (

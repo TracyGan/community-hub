@@ -7,10 +7,10 @@ export function defineDonationsRoutes(expressApp: Application) {
 
     donationsRouter.get("/", donationController.getAllDonations)
 
-    donationsRouter.get("/:userId", donationController.getAllDonationByUser)
-    donationsRouter.get("/:userId", donationController.createDonation)
-    donationsRouter.get("/", donationController.updateDonation)
-    donationsRouter.get("/", donationController.deleteDonation)
+    donationsRouter.get("/", donationController.getAllDonationByUser)
+    donationsRouter.post("/", donationController.createDonation)
+    donationsRouter.put("/", donationController.updateDonation)
+    donationsRouter.delete("/:donationId", donationController.deleteDonation)
 
     expressApp.use('/v1/donations', donationsRouter)
 }

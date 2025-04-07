@@ -6,6 +6,10 @@
         "dev": "concurrently \"npm run dashboard\" \"npm run api\""
     },
     "dependencies": {
+        "@prisma/client": "^6.5.0",
         "concurrently": "^9.1.2"
+    },
+    "devDependencies": {
+        "prisma": "^6.5.0"
     }
 }

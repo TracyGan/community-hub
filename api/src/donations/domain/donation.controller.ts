@@ -6,7 +6,7 @@ import { Log } from 'debug-next'
 const { log } = Log()
 
 export const createDonation = async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.id
+    const userId = "e58c53ed-8a9b-4c77-b6ac-5cfd10498d94"
     try {
         log('Creating a donation with payload', req.body)
         const payload = donationValidator.validateCreateDonation(req.body)
@@ -28,22 +28,19 @@ export const getAllDonations = async (req: Request, res: Response, next: NextFun
         log('Retrieving all donations')
         const donations = await donationService.getAllDonations()
 
-        res.status(200).json({ message: 'Donation created successfully', donations: donations })
+        res.status(200).json({ message: 'All donations are retrieved successfully', donations: donations })
     } catch (error) {
         next(error)
     }
 }
 
 export const getAllDonationByUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.id 
+    const userId = "e58c53ed-8a9b-4c77-b6ac-5cfd10498d94"
     try {
         log(`Retrieving all donations by user with id[${req.body}]`)
 
-        // donationValidator.validateExistingDonation(userId)
-        // check if user exists?
-
         const donations = await donationService.getAllDonationByUser(userId)
-        res.status(200).json({ message: 'Donations retrieved successfully', donations })
+        res.status(200).json({ message: 'All donations by user are retrieved successfully', donations })
     } catch (error) {
         next(error)
     }
@@ -51,9 +48,9 @@ export const getAllDonationByUser = async (req: Request, res: Response, next: Ne
 
 export const updateDonation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const donationId = req.body
+        const donationId = req.body.id
         log(`Updating the donation with id[${donationId}]`)
-        const payload = donationValidator.validateCreateDonation(req.body)
+        const payload = donationValidator.validateUpdateDonation(req.body)
 
         if (!payload) {
             res.status(400).json({ message: 'Invalid donation payload' })
@@ -61,7 +58,7 @@ export const updateDonation = async (req: Request, res: Response, next: NextFunc
 
         const donation = await donationService.updateDonation(donationId, payload)
 
-        res.status(201).json({ message: 'Donation created successfully', donation: donation })
+        res.status(201).json({ message: 'Donation updated successfully', donation: donation })
     } catch (error) {
         next(error)
     }
@@ -70,10 +67,11 @@ export const updateDonation = async (req: Request, res: Response, next: NextFunc
 // Soft delete
 export const deleteDonation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const donationId = req.body
-        log(`Deleting donation with id ${donationId}`)
-        const result = await donationService.deleteDonation(donationId)
-        res.status(204).send()
+        const {donationId} = req.params
+        console.log(`Deleting donation with id ${donationId}`)
+
+        const donation = await donationService.deleteDonation(donationId)
+        res.status(200).json({ message: 'Donation deleted successfully', donation: donation })
     } catch (error) {
         next(error)
     }

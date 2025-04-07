@@ -1,6 +1,8 @@
 "use client";
 import { useCallback, useState } from "react";
-import { DonationModal } from "../modals/donation-modal";
+import { DonationModal } from "../../modals/donation-modal";
+import { useGetAllDonations } from "@/app/queries/donations";
+import type { TDonation } from "@/app/utils/types";
 
 export const CATEGORY = {
 	FOOD: {
@@ -86,39 +88,43 @@ const items: TItem[] = [
 
 export function BrowseItems() {
 	const [openDonationModal, setOpenDonationModal] = useState(false);
-	const [selectedItem, setSelectedItem] = useState<TItem | null>(null);
+	const [selectedItem, setSelectedItem] = useState<TDonation | null>(null);
 
-	const clickDonation = useCallback((item: TItem) => {
+	const clickDonation = useCallback((item: TDonation) => {
 		setSelectedItem(item);
 		setOpenDonationModal(true);
 	}, []);
+
+	const { data: donations } = useGetAllDonations();
 
 	return (
 		<div>
 			<div className="text-lg py-3 font-semibold">Browse Donations</div>
 			<div className="grid grid-cols-3 gap-3">
-				{items.map((item) => {
+				{donations?.map((donation) => {
 					return (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<div
-							key={item.id}
+							key={donation.id}
 							className="border rounded-lg p-3 bg-[#ffffff] border-gray-400 hover:shadow-xl"
-							onClick={() => clickDonation(item)}
+							onClick={() => clickDonation(donation)}
 						>
 							<span className="flex flex-row justify-between">
-								<div className="font-bold">{item.title}</div>
+								<div className="font-bold">{donation.title}</div>
 								<div
-									className={` border rounded-xl justify-end px-2  ${CATEGORY[item.category].color}`}
+									className={` border rounded-xl justify-end px-2  ${CATEGORY[donation.category].color}`}
 								>
-									{CATEGORY[item.category].name}
+									{CATEGORY[donation.category].name}
 								</div>
 							</span>
-							<p className="text-gray-500 text-xs">@{item.owner}</p>
+							{/* <p className="text-gray-500 text-xs">@{donation.owner}</p> */}
 
 							<p className="text-gray-500 text-sm">
-								Pickup Location: {item.location}
+								Pickup Location: {donation.location}
 							</p>
-							<p className="text-gray-500 text-sm">Pickup Time: {item.time}</p>
+							<p className="text-gray-500 text-sm">
+								Pickup Time: {donation.time.toLocaleString()}
+							</p>
 						</div>
 					);
 				})}

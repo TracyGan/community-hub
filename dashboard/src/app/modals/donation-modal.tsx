@@ -3,14 +3,12 @@ import { Button } from "../components/Button";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
 } from "../components/Dialog";
-import { Input } from "../components/Input";
-import type { TItem } from "../home/browse-items";
+import type { TDonation } from "../utils/types";
 
 export function DonationModal({
 	open,
@@ -19,9 +17,9 @@ export function DonationModal({
 }: {
 	open: boolean;
 	toggleOpen: (open: boolean) => void;
-	donationItem: TItem;
+	donationItem: TDonation;
 }) {
-	const { title, description, location, time, owner } = donationItem;
+	const { title, description, location, time } = donationItem;
 
 	const submitInterestInDonation = () => {
 		// todo: place the interest of donation
@@ -36,12 +34,12 @@ export function DonationModal({
 					<DialogHeader>
 						<DialogTitle>{title}</DialogTitle>
 					</DialogHeader>
-					<p className="text-xs">Donated by @{owner}</p>
+					<p className="text-xs">Donated by @</p>
 					<p className="py-2">{description}</p>
 
 					<p className="p-0">
 						Pickup Location: {location} <br />
-						Pickup Time: {time}
+						Pickup Time: {time ? time.toLocaleString() : "No set time"}
 					</p>
 
 					<DialogFooter>

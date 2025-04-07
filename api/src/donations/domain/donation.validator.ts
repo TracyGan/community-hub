@@ -1,5 +1,5 @@
 import z from 'zod'
-import {Category}  from '@prisma/client';
+import { Category, DonationStatus }  from '@prisma/client';
 import { prisma } from '../../prisma';
 
 const createDonationSchema = z.object({
@@ -7,7 +7,8 @@ const createDonationSchema = z.object({
     description: z.string().min(1),
     category : z.enum([Category.FOOD, Category.CLOTHING, Category.FURNITURE, Category.BOOKS, Category.HOUSEHOLD]),
     location: z.string().min(1),
-    time: z.date(),
+    time: z.string(),
+    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED])
 })
 
 export type TDonationPayload = z.infer<typeof createDonationSchema>
@@ -17,7 +18,29 @@ export function validateCreateDonation(payload: unknown) {
         const validated = createDonationSchema.parse(payload)
         return validated
     } catch (error) {
-        console.error("Validation error:", error)
+        console.error("Validation error when creating donation:", error)
+        throw error  // This ensures the error gets handled later.
+    }
+}
+
+const updateDonationSchema = z.object({
+    id: z.string().uuid(),
+    title: z.string().min(1),
+    description: z.string().min(1),
+    category : z.enum([Category.FOOD, Category.CLOTHING, Category.FURNITURE, Category.BOOKS, Category.HOUSEHOLD]),
+    location: z.string().min(1),
+    time: z.string(),
+    status: z.enum([DonationStatus.ACCEPTED, DonationStatus.CANCELLED, DonationStatus.PENDING, DonationStatus.RETRIEVED]),
+    donorId: z.string().uuid(),
+})
+
+
+export function validateUpdateDonation(payload: unknown) {
+    try {
+        const validated = updateDonationSchema.parse(payload)
+        return validated
+    } catch (error) {
+        console.error("Validation error when updating donation:", error)
         throw error  // This ensures the error gets handled later.
     }
 }

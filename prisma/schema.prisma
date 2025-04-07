@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum Category {
@@ -29,7 +30,7 @@ enum DonationStatus {
 }
 
 model User {
-  id      String    @id @map("_id") @default(uuid()) 
+  id      String    @id @default(uuid()) 
   name    String
   email   String @unique
   password String 
@@ -38,21 +39,23 @@ model User {
   retrievedDonations Donation[] @relation("recipients") 
 
   createdAt DateTime  @default(now())
-  updatedAt DateTime
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 }
 
 model Donation {
-  id          String   @id @map("_id") @default(uuid()) 
+  id          String   @id @default(uuid()) 
   title       String 
   description String
   category    Category
   donorId     String
   recipientId String?
   status      DonationStatus
+  location    String
+  time        DateTime
 
   createdAt DateTime  @default(now())
-  updatedAt DateTime
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
   donor     User  @relation("donors", fields: [donorId], references: [id])

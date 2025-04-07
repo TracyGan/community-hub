@@ -6,29 +6,29 @@ import { z } from "zod";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "../components/Form";
-import { Input } from "../components/Input";
+} from "../../components/Form";
+import { Input } from "../../components/Input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "../components/Select";
+} from "../../components/Select";
 import { CATEGORY } from "../home/browse-items";
-import { DateTimePicker } from "../components/DateTimePicker";
-import { Button } from "../components/Button";
+import { Category, type TCategory } from "../../utils/types";
+import { DateTimePicker } from "../../components/DateTimePicker";
+import { Button } from "../../components/Button";
 
 const formSchema = z.object({
 	title: z.string().min(1),
 	location: z.string().min(1),
 	description: z.string().min(1),
-	category: z.string().min(1, { message: "Select a category" }),
+	category: z.enum(Category),
 	time: z.date({ message: "Select a date and time" }),
 });
 
@@ -37,20 +37,29 @@ export type TDonationFormProps = {
 		title: string;
 		location: string;
 		description: string;
+		category: TCategory;
 		time: Date;
 	}) => void;
+	donation?: {
+		title: string;
+		location: string;
+		description: string;
+		category: TCategory;
+		time: Date;
+	};
+	type: string;
 };
 
 export function DonationForm(props: TDonationFormProps) {
-	const { onSubmit } = props;
+	const { onSubmit, donation, type } = props;
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			title: "",
-			location: "",
-			description: "",
-			category: "",
-			time: new Date(),
+			title: donation?.title || "",
+			location: donation?.location || "",
+			description: donation?.description || "",
+			category: donation?.category || Category[0],
+			time: donation?.time || new Date(),
 		},
 	});
 
@@ -166,7 +175,7 @@ export function DonationForm(props: TDonationFormProps) {
 					)}
 				/>
 				<Button type="submit" className="bg-[#F6CE48]">
-					Create A Donation
+					{type} A Donation
 				</Button>
 			</form>
 		</Form>

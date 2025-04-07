@@ -1,11 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 declare global {
-    var prismaClient: PrismaClient
+    var prismaClient: PrismaClient | undefined
 }
 
-if (!global.prismaClient) {
-    global.prismaClient = new PrismaClient()
-}
-
-export const prisma = global.prismaClient
+export const prisma = globalThis.prisma || new PrismaClient();

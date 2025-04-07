@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+        "module": "commonjs",
+        /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+        "lib": ["es2021"],
+        /* Specify library files to be included in the compilation. */
+        "esModuleInterop": true,
+        /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+        "skipLibCheck": true,
+        /* Skip type checking of declaration files. */
+        "forceConsistentCasingInFileNames": true,
+        /* Disallow inconsistently-cased references to the same file. */
+        "sourceMap": true,
+        /* Enables generation of sourcemap files. */
+        "paths": {
+            "@/*": ["./src/*",".test-setup.ts"],
+            "@test-setup": ["./test-setup.ts"],
+            "@vault/*": ["./src/modules/vault/*"],
+            "@pints-vault/*": ["./src/modules/pints-vault/*"]
+        },
+        /* A series of entries which re-map imports to lookup locations relative to the baseUrl if set, or to the tsconfig file itself otherwise. */
+        "baseUrl": "./"
+        /* Sets a base directory from which to resolve non-relative module names. */
+    }
+}

@@ -7,15 +7,14 @@ export async function createDonation(userId: string, payload: TDonationPayload) 
         const donation = await prisma.donation.create({
             data: {
                 ...payload,
+                time: new Date(payload.time),
                 donorId: userId,
-                status: DonationStatus.PENDING,
-                updatedAt: new Date()
             }
         })
-
+        console.log("Donation created:", donation)
         return donation
    } catch (error) {
-
+        console.error("Error creating donation:", error);
    }
 }
 
@@ -30,10 +29,9 @@ export async function updateDonation(donationId: string, payload: TDonationPaylo
                 id: donationId
             }
         })
-
         return donation
     } catch (error) {
-
+        console.error("Error updating donation:", error);
     }
 }
 
@@ -46,10 +44,10 @@ export async function deleteDonation(donationId: string) {
             },
             data: {deletedAt: new Date()}
         })
-    
+
         return deletedDonation
     } catch (error) {
-
+        console.error("Error deleting donation:", error);
     }
 }
 
@@ -58,12 +56,14 @@ export async function getAllDonations() {
         const donations = await prisma.donation.findMany({
             where: {
                 deletedAt: null
+            },
+            orderBy: {
+                createdAt: 'desc'
             }
         })
-
         return donations
    } catch (error) {
-
+        console.error("Error retrieving all donations:", error);
    }
 }
 
@@ -75,9 +75,8 @@ export async function getAllDonationByUser(userId: string) {
                 donorId: userId
             }
         })
-
         return donations
     } catch (error) {
-
+        console.error("Error retrieving donation by user:", error);
     }
 }

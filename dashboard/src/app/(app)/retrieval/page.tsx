@@ -1,6 +1,6 @@
 "use client";
 
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../../components/NavBar";
 import {
 	Table,
 	TableBody,
@@ -8,22 +8,24 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "../components/Table";
+} from "../../components/Table";
 
-export default function PostingsPage() {
+export default function RetrievalPage() {
 	return (
 		<div>
 			<NavBar />
 			<div className="p-8">
 				<div className="text-xl font-semibold">
-					View Previous Donation Postings
+					View Previous Donation Retrievals
 					<div className="py-3">
+						<p className="text-lg py-3">All Retrievals</p>
 						<Table>
 							<TableHeader>
 								<TableRow>
 									<TableHead className="w-[100px]">Title</TableHead>
 									<TableHead>Status</TableHead>
 									<TableHead>Category</TableHead>
+									<TableHead>Owner</TableHead>
 									<TableHead>Description</TableHead>
 									<TableHead className="text-right">Pickup Location</TableHead>
 									<TableHead className="text-right">Pickup Time</TableHead>

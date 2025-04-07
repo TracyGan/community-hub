@@ -26,14 +26,14 @@ export function NavBar() {
 								View Postings
 							</a>
 						</li>
-						<li>
+						{/* <li>
 							<a
 								href="/retrieval"
 								className={isActive("/retrieval") ? "font-bold" : ""}
 							>
 								View Retrieval
 							</a>
-						</li>
+						</li> */}
 						<li>
 							<a
 								href="/donate"
