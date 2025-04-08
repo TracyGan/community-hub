@@ -8,6 +8,7 @@ export function defineDonationsRoutes(expressApp: Application) {
     donationsRouter.get("/", donationController.getAllDonationsNotByUser)
 
     donationsRouter.get("/:userId", donationController.getAllDonationByUser)
+    donationsRouter.get("/retrievals/:userId", donationController.getAllDonationRetrievals)
 
     donationsRouter.post("/", donationController.createDonation)
     donationsRouter.put("/", donationController.updateDonation)
