@@ -38,11 +38,10 @@ export async function updateDonation(donationId: string, payload: TDonationPaylo
 // Soft delete
 export async function deleteDonation(donationId: string) {
     try {
-        const deletedDonation = await prisma.donation.update({
+        const deletedDonation = await prisma.donation.delete({
             where: {
                 id: donationId,
             },
-            data: {deletedAt: new Date()}
         })
 
         return deletedDonation

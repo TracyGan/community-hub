@@ -65,7 +65,7 @@ export const updateDonation = async (req: Request, res: Response, next: NextFunc
     }
 }
 
-// Soft delete
+// Hard delete
 export const deleteDonation = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const {donationId} = req.params
