@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from "../components/Dialog";
 import type { TDonation } from "../utils/types";
-import { invalidateGetAllDonations } from "../queries/donations";
+import { invalidateGetAllDonationsNotByUser } from "../queries/donations";
 import { useUpdateDonation } from "../mutations/use-mutate-donations";
 
 export function DonationModal({
@@ -26,7 +26,7 @@ export function DonationModal({
 	const updateDonationMutation = useUpdateDonation({
 		onSuccess: () => {
 			toggleOpen(false);
-			invalidateGetAllDonations();
+			invalidateGetAllDonationsNotByUser();
 			toast("Donation has been created!");
 		},
 		onError: () => {

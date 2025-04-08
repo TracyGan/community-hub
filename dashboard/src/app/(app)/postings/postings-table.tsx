@@ -8,7 +8,7 @@ import {
 } from "../../components/Table";
 import { Icons } from "@/app/components/Icons";
 import convertDateToString from "@/app/utils/date";
-import { useGetAllUserDonations } from "@/app/queries/donations";
+import { useGetAllDonations } from "@/app/queries/donations";
 import type { TDonation } from "@/app/utils/types";
 
 type TPostingsProps = {
@@ -19,7 +19,7 @@ type TPostingsProps = {
 export default function PostingsTable(props: TPostingsProps) {
 	const { editDonation, deleteDonation } = props;
 
-	const { data: donations } = useGetAllUserDonations();
+	const { data: donations } = useGetAllDonations();
 
 	return (
 		<Table>

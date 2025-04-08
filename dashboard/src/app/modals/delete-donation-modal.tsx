@@ -10,7 +10,7 @@ import {
 	DialogTrigger,
 } from "../components/Dialog";
 import { useDeleteDonation } from "../mutations/use-mutate-donations";
-import { invalidateGetAllUserDonations } from "../queries/donations";
+import { invalidateGetAllDonations } from "../queries/donations";
 
 export function DeleteDonationModal({
 	open,
@@ -28,7 +28,7 @@ export function DeleteDonationModal({
 	const deleteDonationMutation = useDeleteDonation({
 		onSuccess: () => {
 			toggleOpen(false);
-			invalidateGetAllUserDonations();
+			invalidateGetAllDonations();
 			toast("Donation has been deleted!");
 		},
 		onError: () => {

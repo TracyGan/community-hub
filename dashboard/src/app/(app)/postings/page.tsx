@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllUserDonations } from "@/app/queries/donations";
+import { useGetAllDonations } from "@/app/queries/donations";
 import { NavBar } from "../../components/NavBar";
 import {
 	Table,
