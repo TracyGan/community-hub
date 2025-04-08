@@ -42,9 +42,8 @@ export function NavBar() {
 								Donate
 							</a>
 						</li>
-						<div className="">
-							<Icons.UserIconCircle />
-						</div>
+
+						<Icons.UserIconCircle />
 					</ul>
 				</div>
 			</div>
