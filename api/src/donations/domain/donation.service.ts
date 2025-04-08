@@ -54,7 +54,6 @@ export async function getAllDonationsNotByUser(userId: string) {
    try {
         const donations = await prisma.donation.findMany({
             where: {
-                deletedAt: null,
                 NOT: {
                     donorId: userId
                 }
@@ -73,12 +72,27 @@ export async function getAllDonationByUser(userId: string) {
     try {
         const donations = await prisma.donation.findMany({
             where: {
-                deletedAt: null,
                 donorId: userId
             }
         })
         return donations
     } catch (error) {
         console.error("Error retrieving donation by user:", error);
+    }
+}
+
+export async function getAllDonationRetrievals(userId: string) {
+    try {
+        const donationsWithUsers = await prisma.donation.findMany({
+            where: {
+                recipientId: userId
+            },
+            include: {
+                donor: true  
+            }
+        })
+        return donationsWithUsers
+    } catch (error) {
+        console.error("Error fetching donation retrievals by user:", error);
     }
 }
