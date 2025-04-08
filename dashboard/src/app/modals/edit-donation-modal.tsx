@@ -16,7 +16,7 @@ import {
 	type TDonationFormProps,
 } from "../(app)/donate/donate-form";
 import { useUpdateDonation } from "../mutations/use-mutate-donations";
-import { invalidateGetAllDonations } from "../queries/donations";
+import { invalidateGetAllUserDonations } from "../queries/donations";
 
 export function EditDonationModal({
 	open,
@@ -35,11 +35,11 @@ export function EditDonationModal({
 	const updateDonationMutation = useUpdateDonation({
 		onSuccess: () => {
 			toggleOpen(false);
-			invalidateGetAllDonations();
-			toast("Donation has been created!");
+			invalidateGetAllUserDonations();
+			toast("Donation has been edited!");
 		},
 		onError: () => {
-			toast("Donation has unsuccessfully been created!");
+			toast("Donation has unsuccessfully been edited!");
 		},
 	});
 

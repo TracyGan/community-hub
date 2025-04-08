@@ -44,6 +44,6 @@ export function useGetAllUserDonations() {
 }
 
 export const invalidateGetAllUserDonations = () => {
-    queryClient.invalidateQueries({ queryKey: [baseUrl, ''] })
+    queryClient.invalidateQueries({ queryKey: [baseUrl] })
 }
 
