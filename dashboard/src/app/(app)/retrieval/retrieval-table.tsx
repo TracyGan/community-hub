@@ -16,13 +16,13 @@ export default function RetrievalTable() {
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead className="w-[100px]">Title</TableHead>
-					<TableHead>Status</TableHead>
-					<TableHead>Category</TableHead>
-					<TableHead>Donor</TableHead>
-					<TableHead>Description</TableHead>
-					<TableHead className="text-right">Pickup Location</TableHead>
-					<TableHead className="text-right">Pickup Time</TableHead>
+					<TableHead className="w-[100px] font-semibold">Title</TableHead>
+					<TableHead className="font-semibold">Status</TableHead>
+					<TableHead className="font-semibold">Category</TableHead>
+					<TableHead className="font-semibold">Donor</TableHead>
+					<TableHead className="font-semibold">Description</TableHead>
+					<TableHead className="font-semibold">Pickup Location</TableHead>
+					<TableHead className="font-semibold">Pickup Time</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
