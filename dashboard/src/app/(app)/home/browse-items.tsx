@@ -27,65 +27,6 @@ export const CATEGORY = {
 	},
 } as const;
 
-export type TItem = {
-	id: number;
-	category: keyof typeof CATEGORY;
-	title: string;
-	location: string;
-	description: string;
-	time: string;
-	owner: string;
-};
-const items: TItem[] = [
-	{
-		id: 1,
-		category: "FOOD" as keyof typeof CATEGORY,
-		title: "Corn",
-		description:
-			"hdsahfuiafi uhqiuhfwei uwhig uei dwehiu huia hfuihuaiwh i urhquih  edsi hduiashduihasuidhsuiahdia",
-		location: "Jurong West St 42",
-		time: "10/04/2025",
-		owner: "Justine",
-	},
-	{
-		id: 2,
-		category: "HOUSEHOLD" as keyof typeof CATEGORY,
-		title: "Hand Mixer",
-		description:
-			"dausi dh ihe wqi uehui wqhe ui wqhu eihw uie heiwqh hweih iuqwh eui hqwiue ",
-		location: "Jurong West St 42",
-		time: "10/04/2025",
-		owner: "Justine",
-	},
-	{
-		id: 3,
-		category: "FURNITURE" as keyof typeof CATEGORY,
-		title: "Dining Chairs",
-		description: "d has udihsa iudhuh uehu hufhqh ruhuirh iuw ",
-		location: "Jurong West St 42",
-		time: "10/04/2025",
-		owner: "Justine",
-	},
-	{
-		id: 4,
-		category: "CLOTHING" as keyof typeof CATEGORY,
-		title: "Aritzia Sweatpants",
-		description: "s hd iaodi sai odsi e jrio jioj ijwioq oirio w3r",
-		location: "Jurong West St 42",
-		time: "10/04/2025",
-		owner: "Justine",
-	},
-	{
-		id: 5,
-		category: "BOOKS" as keyof typeof CATEGORY,
-		title: "Harry Potter: Greatest Width",
-		description: "ds ndia odiosh  wjieoh oiah  jiowqjr ",
-		location: "Jurong West St 42",
-		time: "10/04/2025",
-		owner: "Justine",
-	},
-];
-
 export function BrowseItems() {
 	const [openDonationModal, setOpenDonationModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState<TDonation | null>(null);
@@ -129,11 +70,7 @@ export function BrowseItems() {
 					);
 				})}
 			</div>
-			{/* <div className="flex flex-row justify-center p-3">
-				<button type="button" className="rounded-3xl px-3 py-2 bg-[#F6CE48]">
-					Browse More ...
-				</button>
-			</div>{" "} */}
+
 			{selectedItem && (
 				<DonationModal
 					open={openDonationModal}
