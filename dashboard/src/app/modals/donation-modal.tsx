@@ -62,7 +62,6 @@ export function DonationModal({
 					<DialogHeader>
 						<DialogTitle>{title}</DialogTitle>
 					</DialogHeader>
-					<p className="text-xs">Donated by @</p>
 					<p className="py-2">{description}</p>
 
 					<p className="p-0">
