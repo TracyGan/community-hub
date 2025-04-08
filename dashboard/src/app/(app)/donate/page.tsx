@@ -11,7 +11,7 @@ export default function MakeADonation() {
 	const createDonationMutation = useCreateDonation({
 		onSuccess: () => {
 			toast("Donation has been created!");
-			router.push("./");
+			router.push("./postings");
 		},
 		onError: () => {},
 	});
