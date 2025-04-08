@@ -13,8 +13,12 @@ export const Category = [
 
 export type TCategory = (typeof Category)[number]
 
+export type TDonationWithDonor = TDonation & {donor: TUser}
+
 export type {
     TUser,
     TDonation
 }
+
+
 
